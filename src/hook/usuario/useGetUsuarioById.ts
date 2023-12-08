@@ -2,8 +2,14 @@
 import { useState, useEffect } from 'react';
 import usuarioService from '../../services/usuarioService';
 
+interface User {
+    nombre: string;
+    email: string;
+    // Agrega más campos según los datos que esperas recibir
+}
+
 const useGetUserById = (id: number) => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 

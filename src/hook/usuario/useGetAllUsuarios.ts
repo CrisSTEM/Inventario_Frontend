@@ -4,8 +4,14 @@ import usuarioService from '../../services/usuarioService';
 
 type ErrorType = string;
 
+interface Usuario {
+    id: number;
+    nombre: string;
+    email: string;
+  }
+
 const useGetAllUsers = () => {
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState<Usuario[]>([]);
     const [loading, setLoading] = useState(true);
     const [error] = useState<ErrorType | null>(null);
 
