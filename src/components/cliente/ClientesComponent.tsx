@@ -4,11 +4,17 @@ import useGetAllClientes from '../../hook/cliente/useGetAllClientes';
 import DeleteClienteComponent from './DeleteClienteComponent';
 import UpdateClienteForm from './UpdateClienteForm';
 import { FiEdit, FiTrash2, FiEye } from 'react-icons/fi';
+import ClienteDetails from './ClienteDetails';
 
 const ClientesComponent: React.FC = () => {
     const { clientes, loading, error, refetch } = useGetAllClientes();
     const [deleteClienteId, setDeleteClienteId] = useState<number | null>(null);
     const [editClienteId, setEditClienteId] = useState<number | null>(null);
+    const [viewClienteId, setViewClienteId] = useState<number | null>(null);
+
+    const handleViewClick = (id: number) => {
+        setViewClienteId(id);
+    };
 
     const handleEditClick = (id: number | undefined) => {
         if (id !== undefined) {
@@ -71,7 +77,7 @@ const ClientesComponent: React.FC = () => {
                                 <td className="py-4 px-6">{cliente.vendedor}</td>
                                 <td className="py-4 px-6">
                                     <div className="flex space-x-2">
-                                        <a href="#" className="text-blue-500 hover:text-blue-700">
+                                        <a href="#" className="text-blue-500 hover:text-blue-700" onClick={() => handleViewClick(cliente.id)}>
                                             <FiEye />
                                         </a>
                                         <a href="#" className="text-blue-500 hover:text-blue-700" onClick={() => handleEditClick(cliente.id)}>
@@ -99,6 +105,14 @@ const ClientesComponent: React.FC = () => {
                     // Asegúrate de agregar las props necesarias aquí
                 />
             )}
+            {viewClienteId !== null && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center">
+                <div className="bg-white p-4 rounded">
+                    <ClienteDetails id={viewClienteId} />
+                    <button onClick={() => setViewClienteId(null)} className="mt-2 p-2 bg-red-500 text-white rounded">Cerrar</button>
+                </div>
+            </div>
+)}
         </>
     );
     
