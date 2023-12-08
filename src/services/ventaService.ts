@@ -2,14 +2,14 @@ import axios from 'axios';
 
 const baseURL = 'http://http://127.0.0.1:8000/api/ventas';
 
-interface Venta {
+export interface Venta {
     fecha: string;
     total: number;
     id_usuario: number;
     id_cliente: number;
 }
 
-interface VentaResponse {
+export interface VentaResponse {
     mensaje: string;
     venta?: Venta;
 }
