@@ -22,17 +22,6 @@ const productoService = {
     }
   },
 
-  // Crear un nuevo producto
-  createProducto: async (producto: Producto): Promise<Producto> => {
-    try {
-      const response = await axios.post<Producto>(baseUrl, producto);
-      return response.data;
-    } catch (error) {
-      console.error('Error al crear producto', error);
-      throw error;
-    }
-  },
-
   // Mostrar un producto específico
   getProductoById: async (id: number): Promise<Producto> => {
     try {
@@ -44,6 +33,17 @@ const productoService = {
     }
   },
 
+  // Crear un nuevo producto
+  createProducto: async (producto: Producto): Promise<Producto> => {
+    try {
+      const response = await axios.post<Producto>(baseUrl, producto);
+      return response.data;
+    } catch (error) {
+      console.error('Error al crear producto', error);
+      throw error;
+    }
+  },
+  
   // Actualizar un producto
   updateProducto: async (id: number, producto: Producto): Promise<Producto> => {
     try {

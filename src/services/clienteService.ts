@@ -22,17 +22,6 @@ const clienteService = {
         }
     },
 
-    // Crear un nuevo cliente
-    createCliente: async (clienteData: Cliente): Promise<Cliente> => {
-        try {
-            const response = await axios.post<Cliente>(BASE_URL, clienteData);
-            return response.data;
-        } catch (error) {
-            console.error('Error al crear cliente', error);
-            throw error;
-        }
-    },
-
     // Obtener un cliente específico
     getClienteById: async (id: number): Promise<Cliente> => {
         try {
@@ -40,6 +29,17 @@ const clienteService = {
             return response.data;
         } catch (error) {
             console.error('Error al obtener cliente', error);
+            throw error;
+        }
+    },
+
+    // Crear un nuevo cliente
+    createCliente: async (clienteData: Cliente): Promise<Cliente> => {
+        try {
+            const response = await axios.post<Cliente>(BASE_URL, clienteData);
+            return response.data;
+        } catch (error) {
+            console.error('Error al crear cliente', error);
             throw error;
         }
     },
