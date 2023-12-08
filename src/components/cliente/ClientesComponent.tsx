@@ -2,11 +2,21 @@
 import React, { useState } from 'react';
 import useGetAllClientes from '../../hook/cliente/useGetAllClientes';
 import DeleteClienteComponent from './DeleteClienteComponent';
+import UpdateClienteForm from './UpdateClienteForm';
 import { FiEdit, FiTrash2, FiEye } from 'react-icons/fi';
 
 const ClientesComponent: React.FC = () => {
     const { clientes, loading, error, refetch } = useGetAllClientes();
     const [deleteClienteId, setDeleteClienteId] = useState<number | null>(null);
+    const [editClienteId, setEditClienteId] = useState<number | null>(null);
+
+    const handleEditClick = (id: number | undefined) => {
+        if (id !== undefined) {
+            setEditClienteId(id);
+        } else {
+            console.error('Intento de editar un cliente sin ID');
+        }
+    };
 
     const handleDeleteClick = (id: number | undefined) => {
         if (id !== undefined) {
@@ -64,7 +74,7 @@ const ClientesComponent: React.FC = () => {
                                         <a href="#" className="text-blue-500 hover:text-blue-700">
                                             <FiEye />
                                         </a>
-                                        <a href="#" className="text-blue-500 hover:text-blue-700">
+                                        <a href="#" className="text-blue-500 hover:text-blue-700" onClick={() => handleEditClick(cliente.id)}>
                                             <FiEdit />
                                         </a>
                                         <a href="#" className="text-red-500 hover:text-red-700" onClick={() => handleDeleteClick(cliente.id)}>
@@ -83,8 +93,15 @@ const ClientesComponent: React.FC = () => {
                     onClienteDeleted={onClienteDeleted}
                 />
             )}
+            {editClienteId !== null && (
+                <UpdateClienteForm
+                    clienteId={editClienteId}
+                    // Asegúrate de agregar las props necesarias aquí
+                />
+            )}
         </>
     );
+    
 };
 
 export default ClientesComponent;
