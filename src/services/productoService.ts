@@ -1,5 +1,6 @@
 // productService.ts
-const baseUrl = 'http://http://127.0.0.1:8000/api/productos';
+
+const baseUrl = 'http://127.0.0.1:8000/api/productos';
 
 export interface Producto {
   id?: number;

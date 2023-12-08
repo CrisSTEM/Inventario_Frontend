@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://http://127.0.0.1:8000/api/clientes';
+const BASE_URL = 'http://127.0.0.1:8000/api/clientes';
 
 export interface Cliente {
     id?: number;

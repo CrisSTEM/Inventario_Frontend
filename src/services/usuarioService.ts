@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const baseURL = 'http://http://127.0.0.1:8000/api/usuarios';
+const baseURL = 'http://127.0.0.1:8000/api/usuarios';
 
-const userService = {
-    getAllUsers: async () => {
+const usuarioService = {
+    getAllUsuarios: async () => {
         try {
             const response = await axios.get(baseURL);
             return response.data;
@@ -13,7 +13,7 @@ const userService = {
         }
     },
 
-    createUser: async (userData: { nombre: string; email: string; password: string }) => {
+    createUsuario: async (userData: { nombre: string; email: string; password: string }) => {
         try {
             const response = await axios.post(baseURL, userData);
             return response.data;
@@ -23,7 +23,7 @@ const userService = {
         }
     },
 
-    getUserById: async (id: number) => {
+    getUsuarioById: async (id: number) => {
         try {
             const response = await axios.get(`${baseURL}/${id}`);
             return response.data;
@@ -33,7 +33,7 @@ const userService = {
         }
     },
 
-    updateUser: async (id: number, userData: { nombre?: string; email?: string; password?: string }) => {
+    updateUsuario: async (id: number, userData: { nombre?: string; email?: string; password?: string }) => {
         try {
             const response = await axios.put(`${baseURL}/${id}`, userData);
             return response.data;
@@ -43,7 +43,7 @@ const userService = {
         }
     },
 
-    deleteUser: async (id: number) => {
+    deleteUsuario: async (id: number) => {
         try {
             const response = await axios.delete(`${baseURL}/${id}`);
             return response.data;
@@ -54,4 +54,4 @@ const userService = {
     },
 };
 
-export default userService;
+export default usuarioService;
