@@ -1,13 +1,13 @@
 // DeleteClienteComponent.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import useDeleteCliente from '../../hook/cliente/useDeleteCliente';
 
 interface DeleteClienteComponentProps {
+    clienteId: number;
     onClienteDeleted?: () => void;
 }
 
-const DeleteClienteComponent: React.FC<DeleteClienteComponentProps> = ({ onClienteDeleted }) => {
-    const [clienteId, setClienteId] = useState<number>(0);
+const DeleteClienteComponent: React.FC<DeleteClienteComponentProps> = ({ clienteId, onClienteDeleted }) => {
     const { deleteCliente, error } = useDeleteCliente();
 
     const handleDelete = async () => {
@@ -18,17 +18,21 @@ const DeleteClienteComponent: React.FC<DeleteClienteComponentProps> = ({ onClien
     };
 
     return (
-        <div>
-            <input
-                type="number"
-                value={clienteId}
-                onChange={(e) => setClienteId(parseInt(e.target.value))}
-                placeholder="ID del Cliente"
-            />
-            <button onClick={handleDelete}>Eliminar Cliente</button>
-            {error && <p>Error: {error}</p>}
+        <div className="flex flex-col items-center justify-center p-4">
+            <button 
+                onClick={handleDelete} 
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+                Eliminar Cliente
+            </button>
+            {error && (
+                <p className="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    Error: {error}
+                </p>
+            )}
         </div>
     );
+    
 };
 
 export default DeleteClienteComponent;

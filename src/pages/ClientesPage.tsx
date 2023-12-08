@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import ClientesComponent from '../components/cliente/ClientesComponent';
-import CreateClienteForm from '../components/cliente/CreateClienteForm'; // Asegúrate de tener la ruta correcta
+import CreateClienteForm from '../components/cliente/CreateClienteForm';
 
 const ClientesPage: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
@@ -19,9 +19,9 @@ const ClientesPage: React.FC = () => {
         >
           {showForm ? 'Ocultar Formulario' : 'Agregar Cliente'}
         </button>
-
-        <ClientesComponent />
         {showForm && <CreateClienteForm />}
+        <ClientesComponent />
+
     </Layout>
   );
 };
