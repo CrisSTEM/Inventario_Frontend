@@ -2,17 +2,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-// Importa otros componentes de página aquí
+import ClientesPage from './pages/ClientesPage';
+import ProductosPage from './pages/ProductosPage';
+import PedidosPage from './pages/PedidosPage';
+import DespachoPage from './pages/DespachoPage';
 
 const App: React.FC = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/clientes" element={<HomePage />} />
-        <Route path="/productos" element={<HomePage />} />
-        <Route path="/pedidos" element={<HomePage />} />
-        <Route path="/despacho" element={<HomePage />} /> 
+        <Route path="/clientes" element={<ClientesPage />} />
+        <Route path="/productos" element={<ProductosPage />} />
+        <Route path="/pedidos" element={<PedidosPage />} />
+        <Route path="/despacho" element={<DespachoPage />} /> 
         <Route path="/salir" element={<HomePage />} /> 
       </Routes>
     </Router>

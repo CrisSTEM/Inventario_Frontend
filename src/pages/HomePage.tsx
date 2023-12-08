@@ -5,8 +5,12 @@ import Layout from '../components/Layout';
 const HomePage: React.FC = () => {
   return (
     <Layout>
-      {/* Contenido específico de la página de inicio */}
-      <h2>Contenido de la página de inicio</h2>
+      <header className="text-center my-10">
+      <h1 className="text-4xl font-bold text-gray-800">Bienvenido ackerman</h1>
+            <div className="logo my-5">
+              <img src="/Logo.png" alt="Another Logo" className="mx-auto" />
+            </div>
+      </header>
     </Layout>
   );
 };

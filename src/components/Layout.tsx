@@ -11,7 +11,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <nav className="flex justify-between items-center p-4 bg-white shadow-md">
       <div className="logo">
               {/* Suponiendo que el logo es una imagen, la puedes insertar así */}
-              <img src="../../public/Logo.png" alt="Logo" className="h-10" />
+              <img src="/Logo.png" alt="Logo" className="h-10" />
             </div>
             <div className="nav-links flex gap-4">
               {/* Agrega tus enlaces de navegación aquí */}
@@ -23,12 +23,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <a href="/salir" className="text-gray-600 hover:text-gray-800 transition duration-300">SALIR</a>
             </div>
       </nav>
-      <header className="text-center my-10">
-      <h1 className="text-4xl font-bold text-gray-800">Bienvenido ackerman</h1>
-            <div className="logo my-5">
-              <img src="../../public/Logo.png" alt="Another Logo" className="mx-auto" />
-            </div>
-      </header>
       <main>{children}</main>
     </div>
   );

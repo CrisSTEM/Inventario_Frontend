@@ -1,12 +1,12 @@
-// src/pages/ClientesPage.tsx
+// src/pages/Pedidos.tsx
 import React from 'react';
 import Layout from '../components/Layout';
 
-const ClientesPage: React.FC = () => {
+const PedidosPage: React.FC = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4">
-        <h1 className="text-2xl font-semibold my-6">Clientes</h1>
+        <h1 className="text-2xl font-semibold my-6">Pedidos</h1>
         <div className="mb-4">
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
@@ -17,36 +17,43 @@ const ClientesPage: React.FC = () => {
         </div>
         <div className="flex justify-end mb-2">
           <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-            + Agregar un cliente
+            + Agregar un pedido
           </button>
         </div>
         <div className="bg-white shadow-md rounded my-6">
-          <table className="text-left w-full border-collapse">
+          <table className="min-w-full leading-normal">
             <thead>
               <tr>
-                <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">id</th>
-                <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">nombre</th>
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  id
+                </th>
                 {/* Más encabezados de columna aquí */}
               </tr>
             </thead>
             <tbody>
-              <tr className="hover:bg-grey-lighter">
-                <td className="py-4 px-6 border-b border-grey-light">1</td>
-                <td className="py-4 px-6 border-b border-grey-light">Ash</td>
+              {/* Aquí vendrían los datos de los pedidos mapeados desde un array por ejemplo */}
+              <tr className="hover:bg-gray-100">
+                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  1
+                </td>
                 {/* Más celdas de datos aquí */}
               </tr>
-              {/* Más filas aquí */}
+              {/* Repetir para cada pedido */}
             </tbody>
           </table>
         </div>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center py-3">
           <span className="text-sm">
             Mostrando página 1 de 3
           </span>
-          <div>
-            <button className="text-sm mx-2">Anterior</button>
+          <div className="inline-flex">
+            <button className="text-sm mx-2 px-4 py-2 border rounded">
+              Anterior
+            </button>
             {/* Números de página aquí */}
-            <button className="text-sm mx-2">Siguiente</button>
+            <button className="text-sm mx-2 px-4 py-2 border rounded">
+              Siguiente
+            </button>
           </div>
         </div>
       </div>
@@ -54,4 +61,4 @@ const ClientesPage: React.FC = () => {
   );
 };
 
-export default ClientesPage;
+export default PedidosPage;
