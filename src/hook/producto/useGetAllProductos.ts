@@ -1,28 +1,34 @@
 // useGetAllProductos.ts
-import { useState, useEffect } from 'react';
+import { useState, useEffect,  useCallback } from 'react';
 import productoService, { Producto } from '../../services/productoService';
 
 const useGetAllProductos = () => {
   const [productos, setProductos] = useState<Producto[]>([]);
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchProductos = async () => {
+  const fetchProductos = useCallback(async () => {
       try {
+        setLoading(true);
         const data = await productoService.getAllProductos();
         setProductos(data);
-      } catch (error) {
-        setError('Error al obtener productos');
-      } finally {
+        setError(null);
+      } catch (err) {
+        if (err instanceof Error) {
+            setError(err.message);
+        } else {
+            setError('Ocurrió un error desconocido');
+        }
+    } finally {
         setLoading(false);
-      }
-    };
+    }
+}, []);
 
-    fetchProductos();
-  }, []);
+    useEffect(() => {
+      fetchProductos();
+  }, [fetchProductos]);
 
-  return { productos, error, loading };
+  return { productos, error, loading, refetch: fetchProductos };
 };
 
 export default useGetAllProductos;

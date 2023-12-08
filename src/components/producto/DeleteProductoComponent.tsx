@@ -1,33 +1,39 @@
 // DeleteProductoComponent.tsx
-import { useState } from 'react';
+import React from 'react';
 import useDeleteProducto from '../../hook/producto/useDeleteProducto';
 
-const DeleteProductoComponent = () => {
-  const [productId, setProductId] = useState<number>(0);
-  const { deleteProducto, error, loading } = useDeleteProducto();
+interface DeleteProductoComponentProps {
+    productoId: number;
+    onProductoDeleted?: () => void;
+}
 
-  const handleDelete = async () => {
-    if (productId > 0) {
-      await deleteProducto(productId);
-    }
-  };
+const DeleteProductoComponent: React.FC<DeleteProductoComponentProps> = ({ productoId, onProductoDeleted }) => {
+    const { deleteProducto, error, loading } = useDeleteProducto();
 
-  return (
-    <div>
-      <h2>Eliminar Producto</h2>
-      <input
-        type="number"
-        value={productId}
-        onChange={(e) => setProductId(parseInt(e.target.value))}
-        placeholder="Ingrese ID del producto"
-      />
-      <button onClick={handleDelete} disabled={loading}>
-        Eliminar Producto
-      </button>
-      {loading && <p>Eliminando...</p>}
-      {error && <p>Error: {error}</p>}
-    </div>
-  );
+    const handleDelete = async () => {
+        await deleteProducto(productoId);
+        if (!error && !loading && onProductoDeleted) {
+            onProductoDeleted();
+        }
+    };
+
+    return (
+        <div className="flex flex-col items-center justify-center p-4">
+            <button 
+                onClick={handleDelete} 
+                disabled={loading}
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+                Eliminar Producto
+            </button>
+            {loading && <p className="mt-4">Eliminando...</p>}
+            {error && (
+                <p className="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    Error: {error}
+                </p>
+            )}
+        </div>
+    );
 };
 
 export default DeleteProductoComponent;
