@@ -1,4 +1,4 @@
-// productService.ts
+import axios from 'axios';
 
 const baseUrl = 'http://127.0.0.1:8000/api/productos';
 
@@ -10,47 +10,60 @@ export interface Producto {
   precio: number;
 }
 
-// Mostrar todos los productos
-const getAllProductos = async (): Promise<Producto[]> => {
-  const response = await fetch(baseUrl);
-  return response.json();
+const productoService = {
+  // Mostrar todos los productos
+  getAllProductos: async (): Promise<Producto[]> => {
+    try {
+      const response = await axios.get<Producto[]>(baseUrl);
+      return response.data;
+    } catch (error) {
+      console.error('Error al obtener productos', error);
+      throw error;
+    }
+  },
+
+  // Crear un nuevo producto
+  createProducto: async (producto: Producto): Promise<Producto> => {
+    try {
+      const response = await axios.post<Producto>(baseUrl, producto);
+      return response.data;
+    } catch (error) {
+      console.error('Error al crear producto', error);
+      throw error;
+    }
+  },
+
+  // Mostrar un producto específico
+  getProductoById: async (id: number): Promise<Producto> => {
+    try {
+      const response = await axios.get<Producto>(`${baseUrl}/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error al obtener producto', error);
+      throw error;
+    }
+  },
+
+  // Actualizar un producto
+  updateProducto: async (id: number, producto: Producto): Promise<Producto> => {
+    try {
+      const response = await axios.put<Producto>(`${baseUrl}/${id}`, producto);
+      return response.data;
+    } catch (error) {
+      console.error('Error al actualizar producto', error);
+      throw error;
+    }
+  },
+
+  // Eliminar un producto
+  deleteProducto: async (id: number): Promise<void> => {
+    try {
+      await axios.delete(`${baseUrl}/${id}`);
+    } catch (error) {
+      console.error('Error al eliminar producto', error);
+      throw error;
+    }
+  }
 };
 
-// Crear un nuevo producto
-const createProducto = async (producto: Producto): Promise<Producto> => {
-  const response = await fetch(baseUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(producto),
-  });
-  return response.json();
-};
-
-// Mostrar un producto específico
-const getProducto = async (id: number): Promise<Producto> => {
-  const response = await fetch(`${baseUrl}/${id}`);
-  return response.json();
-};
-
-// Actualizar un producto
-const updateProducto = async (id: number, producto: Producto): Promise<Producto> => {
-  const response = await fetch(`${baseUrl}/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(producto),
-  });
-  return response.json();
-};
-
-// Eliminar un producto
-const deleteProducto = async (id: number): Promise<void> => {
-  await fetch(`${baseUrl}/${id}`, {
-    method: 'DELETE',
-  });
-};
-
-export { getAllProductos, createProducto, getProducto, updateProducto, deleteProducto };
+export default productoService;

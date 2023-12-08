@@ -1,17 +1,22 @@
 import { useState } from 'react';
-import { createProducto, Producto } from '../../services/productoService';
+import productoService, { Producto } from '../../services/productoService';
 
 const useCreateProducto = () => {
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const create = async (producto: Producto) => {
+  const createProducto = async (producto: Producto) => {
     setLoading(true);
-    const newProducto = await createProducto(producto);
-    setLoading(false);
-    return newProducto;
+    try {
+      await productoService.createProducto(producto);
+    } catch (error) {
+      setError('Error al crear producto');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  return { create, loading };
+  return { createProducto, error, loading };
 };
 
 export default useCreateProducto;

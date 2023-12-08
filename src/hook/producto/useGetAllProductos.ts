@@ -1,21 +1,27 @@
 import { useState, useEffect } from 'react';
-import { getAllProductos, Producto } from '../../services/productoService';
+import productoService, { Producto } from '../../services/productoService';
 
-const useProductos = () => {
+const useGetAllProductos = () => {
   const [productos, setProductos] = useState<Producto[]>([]);
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProductos = async () => {
-      const data = await getAllProductos();
-      setProductos(data);
-      setLoading(false);
+      try {
+        const data = await productoService.getAllProductos();
+        setProductos(data);
+      } catch (error) {
+        setError('Error al obtener productos');
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchProductos();
   }, []);
 
-  return { productos, loading };
+  return { productos, error, loading };
 };
 
-export default useProductos;
+export default useGetAllProductos;

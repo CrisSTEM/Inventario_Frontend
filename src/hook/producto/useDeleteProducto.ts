@@ -1,16 +1,22 @@
 import { useState } from 'react';
-import { deleteProducto } from '../../services/productoService';
+import productoService from '../../services/productoService';
 
 const useDeleteProducto = () => {
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const deleteProd = async (id: number) => {
+  const deleteProducto = async (id: number) => {
     setLoading(true);
-    await deleteProducto(id);
-    setLoading(false);
+    try {
+      await productoService.deleteProducto(id);
+    } catch (error) {
+      setError('Error al eliminar producto');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  return { deleteProd, loading };
+  return { deleteProducto, error, loading };
 };
 
 export default useDeleteProducto;

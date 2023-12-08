@@ -1,17 +1,22 @@
 import { useState } from 'react';
-import { updateProducto, Producto } from '../../services/productoService';
+import productoService, { Producto } from '../../services/productoService';
 
 const useUpdateProducto = () => {
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const update = async (id: number, producto: Producto) => {
+  const updateProducto = async (id: number, producto: Producto) => {
     setLoading(true);
-    const updatedProducto = await updateProducto(id, producto);
-    setLoading(false);
-    return updatedProducto;
+    try {
+      await productoService.updateProducto(id, producto);
+    } catch (error) {
+      setError('Error al actualizar producto');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  return { update, loading };
+  return { updateProducto, error, loading };
 };
 
 export default useUpdateProducto;
