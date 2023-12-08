@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import clienteService from '../../service/clienteService';
+import clienteService from '../../services/clienteService';
 
 const useDeleteCliente = () => {
     const [error, setError] = useState<string | null>(null);

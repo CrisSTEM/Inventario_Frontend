@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import clienteService from '../../service/clienteService';
+import clienteService from '../../services/clienteService';
 
 interface UpdateClienteData {
     nombre?: string;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import clienteService, { Cliente } from '../../service/clienteService';
+import clienteService, { Cliente } from '../../services/clienteService';
 
 const useCreateCliente = () => {
     const [error, setError] = useState<string | null>(null);

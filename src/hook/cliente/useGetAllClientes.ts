@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import clienteService, { Cliente } from '../../service/clienteService';
+import clienteService, { Cliente } from '../../services/clienteService';
 
 const useGetAllClientes = () => {
     const [clientes, setClientes] = useState<Cliente[]>([]);
