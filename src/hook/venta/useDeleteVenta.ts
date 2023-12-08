@@ -1,3 +1,4 @@
+// useDeleteVenta.ts
 import { useState } from 'react';
 import ventaService, { VentaResponse } from '../../services/ventaService';
 

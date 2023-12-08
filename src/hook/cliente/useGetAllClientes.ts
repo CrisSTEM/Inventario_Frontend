@@ -1,3 +1,4 @@
+// useGetAllClientes.ts
 import { useState, useEffect } from 'react';
 import clienteService, { Cliente } from '../../services/clienteService';
 

@@ -1,3 +1,4 @@
+// useGetAllProductos.ts
 import { useState, useEffect } from 'react';
 import productoService, { Producto } from '../../services/productoService';
 

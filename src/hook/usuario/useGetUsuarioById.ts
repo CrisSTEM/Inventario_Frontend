@@ -1,3 +1,4 @@
+// useGetUsuarioById.ts
 import { useState, useEffect } from 'react';
 import usuarioService from '../../services/usuarioService';
 

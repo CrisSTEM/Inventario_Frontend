@@ -1,3 +1,4 @@
+// useGetVentaById.ts
 import { useState, useEffect } from 'react';
 import ventaService, { Venta } from '../../services/ventaService';
 
