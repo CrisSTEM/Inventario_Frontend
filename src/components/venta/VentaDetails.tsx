@@ -1,19 +1,22 @@
 // VentaDetails.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useGetVentaById from '../../hook/venta/useGetVentaById';
 
-const VentaDetails: React.FC = () => {
-    const [ventaId, setVentaId] = useState<number>(0);
-    const { venta, error } = useGetVentaById(ventaId);
+interface VentaDetailsProps {
+    ventaId: number;
+}
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setVentaId(Number(e.target.value));
-    };
+const VentaDetails: React.FC<VentaDetailsProps> = ({ ventaId }) => {
+    const [localVentaId, setLocalVentaId] = useState<number>(ventaId);
+    const { venta, error } = useGetVentaById(localVentaId);
+
+    useEffect(() => {
+        setLocalVentaId(ventaId);
+    }, [ventaId]);
 
     return (
         <div>
             <h2>Detalle de la Venta</h2>
-            <input type="number" value={ventaId} onChange={handleInputChange} placeholder="Ingrese ID de Venta" />
             {venta && (
                 <div>
                     <h3>Venta ID: {venta.id_cliente}</h3>

@@ -1,9 +1,10 @@
 // ventaService.ts
 import axios from 'axios';
 
-const baseURL = 'http://http://127.0.0.1:8000/api/ventas';
+const baseURL = 'http://127.0.0.1:8000/api/ventas';
 
 export interface Venta {
+    id: number;
     fecha: string;
     total: number;
     id_usuario: number;

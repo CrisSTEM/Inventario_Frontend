@@ -1,8 +1,23 @@
 // UpdateVentaForm.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useUpdateVenta from '../../hook/venta/useUpdateVenta';
 
-const UpdateVentaForm = () => {
+interface VentaData {
+    fecha: string;
+    total: number;
+    id_usuario: number;
+    id_cliente: number;
+    id?: number; // Suponiendo que también incluyes un ID en los datos de la venta
+}
+
+interface UpdateVentaFormProps {
+    initialVentaData?: VentaData;
+    onUpdate?: () => void;
+}
+
+
+// Añadiendo propiedades para datos iniciales y un callback para cuando se actualice
+const UpdateVentaForm: React.FC<UpdateVentaFormProps> = ({ initialVentaData, onUpdate }) => {
     const { updateVenta, response, error } = useUpdateVenta();
     const [ventaData, setVentaData] = useState({
         fecha: '',
@@ -12,6 +27,7 @@ const UpdateVentaForm = () => {
     });
     const [id, setId] = useState<number>(0);
 
+    // Manejar el cambio en los inputs del formulario
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setVentaData({
             ...ventaData,
@@ -19,18 +35,32 @@ const UpdateVentaForm = () => {
         });
     };
 
+    // Manejar el envío del formulario
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         await updateVenta(id, ventaData);
+        if (onUpdate) {
+            onUpdate(); // Llamada al callback después de actualizar
+        }
     };
 
+    // Efecto para inicializar el formulario con los datos pasados como props
+    useEffect(() => {
+        if (initialVentaData) {
+            setVentaData({
+                fecha: initialVentaData.fecha,
+                total: initialVentaData.total,
+                id_usuario: initialVentaData.id_usuario,
+                id_cliente: initialVentaData.id_cliente
+            });
+            setId(initialVentaData.id ?? 0); // Asegúrate de que `id` sea parte de los datos de la venta
+        }
+    }, [initialVentaData]);
+
+    // Renderizado del formulario
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <label>
-                    ID de Venta:
-                    <input type="number" value={id} onChange={e => setId(parseInt(e.target.value))} />
-                </label>
                 <label>
                     Fecha:
                     <input type="date" name="fecha" value={ventaData.fecha} onChange={handleInputChange} />
