@@ -8,6 +8,7 @@ const UpdateClienteForm = () => {
     const { updateCliente, error } = useUpdateCliente();
     const [id, setId] = useState<number>(0);
     const [nombre, setNombre] = useState<string>('');
+    const [rif, setRif] = useState<string>('');
     const [direccion, setDireccion] = useState<string>('');
     const [telefono, setTelefono] = useState<string>('');
     const [vendedor, setVendedor] = useState<string>('');
@@ -37,6 +38,10 @@ const UpdateClienteForm = () => {
             <div>
                 <label>Nombre:</label>
                 <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} />
+            </div>
+            <div>
+                <label>RIF:</label>
+                <input type="text" value={rif} onChange={e => setRif(e.target.value)} />
             </div>
             <div>
                 <label>Dirección:</label>

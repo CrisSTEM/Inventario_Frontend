@@ -109,7 +109,6 @@ const ClientesComponent: React.FC = () => {
             {editClienteId !== null && (
                 <UpdateClienteForm
                     clienteId={editClienteId}
-                    // Asegúrate de agregar las props necesarias aquí
                 />
             )}
             {viewClienteId !== null && (

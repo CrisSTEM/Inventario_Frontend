@@ -7,6 +7,7 @@ const BASE_URL = 'http://127.0.0.1:8000/api/clientes';
 // Definimos la interfaz Cliente para tipar los datos de los clientes
 export interface Cliente {
     id?: number;          // ID del cliente, opcional para casos de creación
+    rif: string;
     nombre: string;       // Nombre del cliente
     direccion: string;    // Dirección del cliente
     telefono: string;     // Teléfono del cliente

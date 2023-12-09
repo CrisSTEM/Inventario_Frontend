@@ -10,6 +10,7 @@ const CreateClienteForm = () => {
     // Estado para almacenar los datos del cliente
     const [clienteData, setClienteData] = useState({
         nombre: '',
+        rif: '',
         direccion: '',
         telefono: '',
         vendedor: ''
@@ -50,6 +51,18 @@ const CreateClienteForm = () => {
                             value={clienteData.nombre}
                             onChange={handleChange}
                             placeholder="Nombre"
+                            className="p-2 border border-gray-300 rounded-md w-full text-black"
+                        />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                        <label htmlFor="rif" className="sr-only">RIF</label>
+                        <input
+                            id="rif"
+                            type="text"
+                            name="rif"
+                            value={clienteData.rif}
+                            onChange={handleChange}
+                            placeholder="RIF"
                             className="p-2 border border-gray-300 rounded-md w-full text-black"
                         />
                     </div>

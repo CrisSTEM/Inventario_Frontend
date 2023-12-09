@@ -1,68 +1,70 @@
-// Importación de los hooks y librerías necesarias.
 import { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-// Definición de la interfaz para los datos del usuario.
 interface UserData {
-    email: string;
+    nombre: string;
     password: string;
 }
 
-// Componente funcional 'Login'.
 function Login() {
-    // Estado para almacenar los datos del usuario (correo electrónico y contraseña).
-    const [userData, setUserData] = useState<UserData>({ email: '', password: '' });
-
-    // Hook para la navegación programática entre rutas.
+    const [userData, setUserData] = useState<UserData>({ nombre: '', password: '' });
+    const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
-    // Manejador de cambios en los campos del formulario.
-    // Actualiza el estado del componente con los valores ingresados.
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setUserData({ ...userData, [e.target.name]: e.target.value });
     };
 
-    // Manejador para el envío del formulario.
-    // Realiza una solicitud POST para iniciar sesión.
     const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault(); // Previene la recarga de la página.
+        e.preventDefault();
         try {
-            // Realiza una solicitud HTTP a la API de login.
             const response = await axios.post('http://127.0.0.1:8000/api/login', userData);
-
-            // Almacena el token recibido en el almacenamiento local.
-            localStorage.setItem('token', response.data.token);
-
-            // Navega a la página de inicio una vez que el inicio de sesión es exitoso.
-            navigate('/home');
+            if (response.data.access_token) {
+                localStorage.setItem('token', response.data.access_token);
+                navigate('/home');
+            } else {
+                setError('No se recibió token');
+            }
         } catch (error) {
-            // Maneja cualquier error que pueda ocurrir durante la solicitud.
+            setError('Error en el inicio de sesión');
             console.error(error);
         }
     };
 
-    // Renderiza el formulario de inicio de sesión.
     return (
-        <form onSubmit={handleSubmit}>
+<div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <form onSubmit={handleSubmit} className="w-full max-w-xs bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div className="mb-4">
             <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={userData.email}
+                type="text"
+                name="nombre"
+                placeholder="Nombre"
+                value={userData.nombre}
                 onChange={handleChange}
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             />
+        </div>
+        <div className="mb-6">
             <input
                 type="password"
                 name="password"
                 placeholder="Contraseña"
                 value={userData.password}
                 onChange={handleChange}
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             />
-            <button type="submit">Iniciar Sesión</button>
-        </form>
+        </div>
+        <div className="flex items-center justify-between">
+            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Iniciar Sesión
+            </button>
+        </div>
+        {error && <p className="text-red-500 text-xs italic mt-4">{error}</p>}
+    </form>
+</div>
+
     );
 }
 
-// Exporta el componente para su uso en otras partes de la aplicación.
 export default Login;

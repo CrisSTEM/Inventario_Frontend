@@ -13,7 +13,7 @@ const HomePage: React.FC = () => {
       {/* Define un encabezado con una clase de estilo */}
       <header className="text-center my-10">
         {/* Título principal de la página con estilos aplicados */}
-        <h1 className="text-4xl font-bold text-gray-800">Bienvenido ackerman</h1>
+        <h1 className="text-4xl font-bold text-gray-800">Bienvenido</h1>
         {/* Contenedor para el logo de la página */}
         <div className="logo my-5">
           {/* Imagen del logo con ruta relativa y clases de estilo para centrarlo */}

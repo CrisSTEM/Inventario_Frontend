@@ -7,7 +7,6 @@ import ProductosPage from './pages/ProductosPage'; // Importa el componente Prod
 import PedidosPage from './pages/PedidosPage'; // Importa el componente PedidosPage.
 import DespachoPage from './pages/DespachoPage'; // Importa el componente DespachoPage.
 import Login from './pages/LoginPage'; // Importa el componente LoginPage.
-import Register from './components/Register'; // Importa el componente Register.
 
 const App: React.FC = () => { // Define el componente App como una función de componente de React.
   return (
@@ -20,7 +19,6 @@ const App: React.FC = () => { // Define el componente App como una función de c
         <Route path="/despacho" element={<DespachoPage />} /> {/* Ruta para la página de despacho. */}
         <Route path="/salir" element={<HomePage />} /> {/* Ruta para "salir", redirige a la página de inicio. */}
         <Route path="/Login" element={<Login />} /> {/* Ruta para la página de login. */}
-        <Route path="/Register" element={<Register />} /> {/* Ruta para la página de registro. */}
       </Routes>
     </Router>
   );
