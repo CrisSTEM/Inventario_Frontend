@@ -2,10 +2,12 @@
 import { useState } from 'react';
 import productoService from '../../services/productoService';
 
+// Custom hook para eliminar un producto
 const useDeleteProducto = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Función para eliminar un producto
   const deleteProducto = async (id: number) => {
     setLoading(true);
     try {

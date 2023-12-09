@@ -1,12 +1,14 @@
 // useGetAllProductos.ts
-import { useState, useEffect,  useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import productoService, { Producto } from '../../services/productoService';
 
+// Custom hook para obtener todos los productos
 const useGetAllProductos = () => {
   const [productos, setProductos] = useState<Producto[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Función para obtener los productos
   const fetchProductos = useCallback(async () => {
       try {
         setLoading(true);
@@ -22,9 +24,10 @@ const useGetAllProductos = () => {
     } finally {
         setLoading(false);
     }
-}, []);
+  }, []);
 
-    useEffect(() => {
+  // useEffect para llamar a fetchProductos cuando el componente se monta
+  useEffect(() => {
       fetchProductos();
   }, [fetchProductos]);
 

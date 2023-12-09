@@ -6,12 +6,16 @@ import UpdateClienteForm from './UpdateClienteForm';
 import { FiEdit, FiTrash2, FiEye } from 'react-icons/fi';
 import ClienteDetails from './ClienteDetails';
 
+// Componente principal para mostrar y gestionar clientes
 const ClientesComponent: React.FC = () => {
+    // Estado y lógica para obtener clientes
     const { clientes, loading, error, refetch } = useGetAllClientes();
+    // Estados para controlar la visualización y edición de los clientes
     const [deleteClienteId, setDeleteClienteId] = useState<number | null>(null);
     const [editClienteId, setEditClienteId] = useState<number | null>(null);
     const [viewClienteId, setViewClienteId] = useState<number | null>(null);
 
+    // Funciones para manejar eventos en los botones de la tabla
     const handleViewClick = (id: number) => {
         setViewClienteId(id);
     };
@@ -36,6 +40,7 @@ const ClientesComponent: React.FC = () => {
         }
     };
 
+    // Renderiza un mensaje de carga o error si es necesario
     if (loading) {
         return <div className="text-center text-blue-500">Cargando clientes...</div>;
     }
@@ -44,11 +49,13 @@ const ClientesComponent: React.FC = () => {
         return <div className="text-center text-red-500">Error: {error}</div>;
     }
 
+    // Función para manejar la eliminación de un cliente
     const onClienteDeleted = () => {
         setDeleteClienteId(null);
         refetch();
     };
 
+    // Renderiza la tabla de clientes y los componentes modales para editar y eliminar
     return (
         <>
             <div className="overflow-x-auto relative shadow-md sm:rounded-lg m-4">
